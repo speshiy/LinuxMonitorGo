@@ -12,3 +12,9 @@ cp -rf linux-monitor-go-service.service /lib/systemd/system/<br>
 systemctl daemon-reload<br>
 systemctl enable linux-monitor-go-service<br>
 systemctl start linux-monitor-go-service
+
+P.S for change host database for monitoring please change flags is <strong>linux-monitor-go-service.service</strong>:<br>
+<strong>-dbmhFlag=127.0.0.1</strong> - database host<br>
+<strong>-dbmnFlag=monitoring</strong> - database name<br>
+<strong>-dbmuFlag=root</strong> - database user<br>
+<strong>-dbmpFlag=1</strong> - database password
