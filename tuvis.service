@@ -1,0 +1,12 @@
+[Unit]
+Description=tuvis-server
+After=network.target
+
+[Service]
+Type=simple
+Restart=always
+RestartSec=3s
+WorkingDirectory=/root/tuvis/
+ExecStart=/root/tuvis/tuvis-mysql-backup -release=true -dbhdump=192.168.146.9 -dbrp=KFngjkdfn45654KFNg05 -dbrtup=weRE(Tj4o3n,smdnHR(Ys -backup_interval=48 -resources_path=/var/tuvis
+[Install]
+WantedBy=multi-user.target

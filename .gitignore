@@ -1,0 +1,8 @@
+
+debug
+debug
+*.zip
+backup.db
+main.exe
+__debug_bin
+resources
