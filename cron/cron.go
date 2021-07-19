@@ -9,7 +9,7 @@ import (
 func InitCron() {
 	c := cron.New()
 
-	c.AddFunc("@every 5s", func() {
+	c.AddFunc("@every 10s", func() {
 		cmonitor.PostRAM()
 	})
 

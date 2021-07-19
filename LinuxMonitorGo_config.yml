@@ -1,0 +1,5 @@
+server:
+  name: server_1
+  ip: 127.0.0.1
+  is_backup_server: false
+  is_database_server: true

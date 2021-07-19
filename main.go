@@ -45,8 +45,8 @@ func main() {
 	router = routes.InitRoutes(router)
 	routerService = serviceRoutes.InitRoutes(routerService)
 
-	//Auto migrate
-	controllers.MigrateMain(nil)
+	//Auto create database and tables
+	controllers.MigrateDo(nil)
 
 	//Start CRON BACKUP MYSQL
 	cron.InitCron()
