@@ -7,7 +7,7 @@ You can use already compiled app LinuxMonitorGo_linux_arm64
 For install
 1) Make directory <strong>/root/linux-monitor-go-service</strong>
 2) Copy <strong>LinuxMonitorGo_linux_arm64</strong> and <strong>linux-monitor-go-service.service</strong> to your server in <strong>/root/linux-monitor-go-service</strong>;
-3) Copy <strong>LinuxMonitorGo_config.yml</strong> in <strong>/root/linux-monitor-go-service</strong>. In this file you can set your server name and ip for monitoring info;
+3) Copy <strong>LinuxMonitorGo_config.yml</strong> in <strong>/root/linux-monitor-go-service</strong>. In this file you should set your server name and ip for monitoring info;
 4) Create and start the service with following commands:<br>
 cp -rf linux-monitor-go-service.service /lib/systemd/system/<br>
 systemctl daemon-reload<br>
