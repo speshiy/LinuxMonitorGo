@@ -35,8 +35,8 @@ func main() {
 	//Add cors to middleware
 	router.Use(cors.New(cors.Config{
 		AllowAllOrigins:  true,
-		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "X-Token-Admin", "X-CSRF-Token"},
-		ExposeHeaders:    []string{"X-Token-Admin", "X-CSRF-Token"},
+		AllowHeaders:     []string{"Origin", "Content-Length", "Content-Type", "X-CSRF-Token"},
+		ExposeHeaders:    []string{"X-CSRF-Token"},
 		AllowCredentials: false,
 		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE"},
 	}))

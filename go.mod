@@ -3,11 +3,10 @@ module github.com/speshiy/LinuxMonitorGo
 go 1.15
 
 require (
-	github.com/dchest/captcha v0.0.0-20200903113550-03f5f0333e1f // indirect
 	github.com/dsnet/compress v0.0.1 // indirect
+	github.com/frankban/quicktest v1.13.0 // indirect
 	github.com/gin-contrib/cors v0.0.0-20170318125340-cf4846e6a636
 	github.com/gin-gonic/gin v1.5.0
-	github.com/go-playground/validator v9.31.0+incompatible // indirect
 	github.com/go-resty/resty v0.0.0-00010101000000-000000000000
 	github.com/go-sql-driver/mysql v1.5.0
 	github.com/golang/snappy v0.0.3 // indirect
@@ -21,7 +20,6 @@ require (
 	github.com/satori/go.uuid v1.2.0
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
-	github.com/xlab/closer v0.0.0-20190328110542-03326addb7c2 // indirect
 	golang.org/x/crypto v0.0.0-20191205180655-e7c4368fe9dd
 	golang.org/x/net v0.0.0-20210525063256-abc453219eb5 // indirect
 	gopkg.in/go-playground/validator.v9 v9.29.1
