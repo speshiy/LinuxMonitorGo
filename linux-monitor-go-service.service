@@ -7,6 +7,6 @@ Type=simple
 Restart=always
 RestartSec=3s
 WorkingDirectory=/root/linux-monitor-go-service/
-ExecStart=/root/linux-monitor-go-service/LinuxMonitorGo_linux_arm64 -release=true -dbmhFlag=127.0.0.1 -dbmnFlag=monitoring -dbmuFlag=root -dbmpFlag=1
+ExecStart=/root/linux-monitor-go-service/LinuxMonitorGo_linux_amd64 -release=true -dbmhFlag=127.0.0.1 -dbmnFlag=monitoring -dbmuFlag=root -dbmpFlag=1
 [Install]
 WantedBy=multi-user.target
