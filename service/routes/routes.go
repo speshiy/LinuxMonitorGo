@@ -5,7 +5,7 @@ import (
 	"github.com/speshiy/LinuxMonitorGo/service/controllers"
 )
 
-//InitRoutes инициализирует пути
+//InitRoutes init routes
 func InitRoutes(router *gin.Engine) *gin.Engine {
 
 	g1 := router.Group("/api/service", gin.BasicAuth(gin.Accounts{

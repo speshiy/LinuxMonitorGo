@@ -5,11 +5,10 @@ import (
 	"github.com/speshiy/LinuxMonitorGo/_monitoring/controllers/cmonitor"
 )
 
-//InitCron init periodic backups
+//InitCron init periodic deals
 func InitCron() {
 	c := cron.New()
 
-	// Мониторинг
 	c.AddFunc("@every 5s", func() {
 		cmonitor.PostRAM()
 	})

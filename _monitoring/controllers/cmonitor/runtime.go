@@ -7,16 +7,65 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-//Restart перезагружаем прогамму
-func Restart(c *gin.Context) {
+//Start service
+func Start(c *gin.Context) {
 	var err error
 
-	cmd := exec.Command("systemctl", "restart", "tuvis")
+	service := c.DefaultQuery("service", "")
+
+	if len(service) == 0 {
+		c.JSON(http.StatusOK, gin.H{"status": "false", "message": "Service name empty"})
+		return
+	}
+
+	cmd := exec.Command("systemctl", "start", service)
 	err = cmd.Run()
 	if err != nil {
 		c.JSON(http.StatusOK, gin.H{"status": "false", "message": err.Error})
 		return
 	}
 
-	c.JSON(http.StatusOK, gin.H{"status": "true", "message": "Служба не перезагружена, так как в случае перезагрузки это сообщение не могло вернуться с сервера"})
+	c.JSON(http.StatusOK, gin.H{"status": "true", "message": "Service started"})
+}
+
+//Stop service
+func Stop(c *gin.Context) {
+	var err error
+
+	service := c.DefaultQuery("service", "")
+
+	if len(service) == 0 {
+		c.JSON(http.StatusOK, gin.H{"status": "false", "message": "Service name empty"})
+		return
+	}
+
+	cmd := exec.Command("systemctl", "stop", service)
+	err = cmd.Run()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "false", "message": err.Error})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "true", "message": "Service stopped"})
+}
+
+//Restart service
+func Restart(c *gin.Context) {
+	var err error
+
+	service := c.DefaultQuery("service", "")
+
+	if len(service) == 0 {
+		c.JSON(http.StatusOK, gin.H{"status": "false", "message": "Service name empty"})
+		return
+	}
+
+	cmd := exec.Command("systemctl", "restart", service)
+	err = cmd.Run()
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{"status": "false", "message": err.Error})
+		return
+	}
+
+	c.JSON(http.StatusOK, gin.H{"status": "true", "message": "Service reloaded"})
 }

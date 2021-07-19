@@ -11,11 +11,7 @@
             "mode": "auto",
             "program": "${fileDirname}",
             "env": {},
-            "args": [
-                "-dbhdump=139.162.148.74",
-                "-dbrp=1",
-                "-dbrtup=weRE(Tj4o3n,smdnHR(Ys"
-            ]
+            "args": []
         }
     ]
 }

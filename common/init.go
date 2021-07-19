@@ -25,26 +25,27 @@ func InitGlobalVars() {
 	releaseFlag := flag.Bool("release", false, "release")
 	portFlag := flag.String("port", "9090", "Port")
 	portServiceFlag := flag.String("port_service", "9091", "PortService")
-	dbmhFlag := flag.String("dbmhFlag", "127.0.0.1", "DBHostMonitoring")
+	dbmhFlag := flag.String("dbmhFlag", "127.0.0.1", "DatabaseMonitorHost")
+	dbmnFlag := flag.String("dbmnFlag", "monitoring", "DatabaseMonitorName")
 	dbmuFlag := flag.String("dbmuFlag", "root", "DatabaseMonitorUser")
 	dbmpFlag := flag.String("dbmpFlag", "1", "DatabaseMonitorPassword")
-	//this command MUST be
+
 	flag.Parse()
 
-	// Получаем конфиг сервера
+	// Get server config
 	readServerConfig()
 
 	settings.IsRelease = *releaseFlag
-
 	settings.Port = *portFlag
 	settings.PortService = *portServiceFlag
-	settings.DBHostMonitoring = *dbmhFlag
+	settings.DatabaseMonitorHost = *dbmhFlag
+	settings.DatabaseMonitorName = *dbmnFlag
 	settings.DatabaseMonitorUser = *dbmuFlag
 	settings.DatabaseMonitorPassword = *dbmpFlag
 
 	log.Println("Port = ", settings.Port)
 	log.Println("PortService = ", settings.PortService)
-	log.Println("DB host dump = ", settings.DBHostMonitoring)
+	log.Println("DB host dump = ", settings.DatabaseMonitorHost)
 
 	PrintBinPath()
 }
@@ -52,12 +53,14 @@ func InitGlobalVars() {
 func readServerConfig() error {
 	type Config struct {
 		Server struct {
-			Name string `yaml:"name" envconfig:"Name"`
-			IP   string `yaml:"ip" envconfig:"IP"`
+			Name             string `yaml:"name" envconfig:"Name"`
+			IP               string `yaml:"ip" envconfig:"IP"`
+			IsBackupServer   bool   `yaml:"is_backup_server" envconfig:"IsBackupServer"`
+			IsDatabaseServer bool   `yaml:"is_database_server" envconfig:"IsDatabaseServer"`
 		} `yaml:"server"`
 	}
 
-	f, err := os.Open("/root/LinuxMonitorGo_config.yml")
+	f, err := os.Open("LinuxMonitorGo_config.yml")
 	if err != nil {
 		return err
 	}
@@ -72,6 +75,8 @@ func readServerConfig() error {
 
 	settings.Server = cfg.Server.Name
 	settings.ServerIP = cfg.Server.IP
+	settings.IsBackupServer = cfg.Server.IsBackupServer
+	settings.IsDatabaseServer = cfg.Server.IsDatabaseServer
 
 	return nil
 }

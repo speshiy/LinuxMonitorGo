@@ -1,28 +1,34 @@
 package settings
 
-//Server имя сервера
+//Server name
 var Server string
 
-//ServerIP url сервера
+//ServerIP ip
 var ServerIP string
+
+//IsDatabaseServer flag
+var IsDatabaseServer bool
+
+//IsBackupServer flag
+var IsBackupServer bool
 
 //IsRelease release flag
 var IsRelease = false
 
-//DBHostMonitoring сервер, куда отправляются данные по мониторингу
-var DBHostMonitoring = "127.0.0.1"
-
-//Port application
+//Port value
 var Port string
 
-//PortService application
+//PortService value
 var PortService string
 
-//DatabaseName название БД
-var DatabaseName string
+//DatabaseMonitorHost host
+var DatabaseMonitorHost = "127.0.0.1"
 
-//DatabaseMonitorUser пользователь БД
+//DatabaseMonitorName name
+var DatabaseMonitorName string
+
+//DatabaseMonitorUser user
 var DatabaseMonitorUser string
 
-//DatabaseMonitorPassword пароль пользователя БД
+//DatabaseMonitorPassword password
 var DatabaseMonitorPassword string

@@ -32,10 +32,8 @@ func CreateUser(host string, databaseName string, username string, password stri
 }
 
 //CreateDatabase if not exist
-func CreateDatabase(host string, databaseName string) error {
-	var err error
-	var db *gorm.DB
-	db, err = gorm.Open("mysql", settings.DatabaseMonitorUser+":"+settings.DatabaseMonitorPassword+"@tcp("+host+":3306)/")
+func CreateDatabase(host string, databaseName string, username string, password string) error {
+	db, err := gorm.Open("mysql", username+":"+password+"@tcp("+host+":3306)/")
 	if err != nil {
 		return err
 	}
@@ -60,16 +58,14 @@ func tryOpenDatabase(host string, databaseName string, username string, password
 }
 
 //OpenDatabase open database
-func OpenDatabase(databaseName string, username string, password string, location string) (*gorm.DB, error) {
+func OpenDatabase(host string, databaseName string, username string, password string, location string) (*gorm.DB, error) {
 	var db *gorm.DB
 	var err error
-	var host = "localhost"
 
 	db, err = tryOpenDatabase(host, databaseName, username, password, location)
 	if err != nil {
-		//if err on user than try to create
 		if strings.Contains(err.Error(), "1045") {
-			err = CreateDatabase(host, databaseName)
+			err = CreateDatabase(host, databaseName, username, password)
 			if err != nil {
 				return nil, err
 			}
@@ -87,9 +83,8 @@ func OpenDatabase(databaseName string, username string, password string, locatio
 			return db, nil
 		}
 
-		//if err unknown database than create Main DB
 		if strings.Contains(err.Error(), "1049") {
-			err = CreateDatabase(host, databaseName)
+			err = CreateDatabase(host, databaseName, username, password)
 			if err != nil {
 				return nil, err
 			}
@@ -105,5 +100,19 @@ func OpenDatabase(databaseName string, username string, password string, locatio
 		log.Print("Connection to DB in service FAILED.", err.Error())
 		return nil, err
 	}
+
 	return db, nil
+}
+
+//ReturnConnectionToDBMonitoring open connection to DB
+func ReturnConnectionToDBMonitoring() (*gorm.DB, error) {
+	var err error
+	var DB *gorm.DB
+
+	DB, err = OpenDatabase(settings.DatabaseMonitorHost, settings.DatabaseMonitorName, settings.DatabaseMonitorUser, settings.DatabaseMonitorPassword, "UTC")
+	if err != nil {
+		return nil, err
+	}
+
+	return DB, nil
 }
