@@ -20,4 +20,4 @@ If you want to change database which collect monitoring data please change flags
 <strong>-dbmpFlag=1</strong> - database password
 
 # P.S
-You can reload service by http for this open <strong>/routes/routes.go</strong> and read routes
+You can reload services on your server by http. For this open <strong>/routes/routes.go</strong> and research routes and what they do
