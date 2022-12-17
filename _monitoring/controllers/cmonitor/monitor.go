@@ -5,6 +5,7 @@ import (
 
 	"github.com/gin-gonic/gin"
 	procmeminfo "github.com/guillermo/go.procmeminfo"
+	"github.com/shirou/gopsutil/disk"
 	"github.com/speshiy/LinuxMonitorGo/_monitoring/models/mmonitor"
 	"github.com/speshiy/LinuxMonitorGo/database"
 	"github.com/speshiy/LinuxMonitorGo/settings"
@@ -65,6 +66,25 @@ func PostRAM() {
 	swapFree := (*meminfo)["SwapFree"]
 	monitor.Swap = swapTotal
 	monitor.SwapUsed = swapTotal - swapFree
+
+	var total uint64
+	var totalUsed uint64
+
+	parts, _ := disk.Partitions(false)
+	for _, p := range parts {
+		device := p.Mountpoint
+		s, _ := disk.Usage(device)
+
+		if s.Total == 0 {
+			continue
+		}
+
+		total += s.Total
+		totalUsed += s.Used
+	}
+
+	monitor.Disk = total / 1024 / 1024 / 1024
+	monitor.DiskUsed = totalUsed / 1024 / 1024 / 1024
 
 	if monitor.ID == 0 {
 		err = monitor.Post(DBMonitor)

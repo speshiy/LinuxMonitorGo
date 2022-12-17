@@ -11,6 +11,8 @@ type Monitor struct {
 	gorm.Model
 	IP               string `gorm:"column:ip" json:"IP"`
 	Server           string `gorm:"column:server" json:"Server"`
+	Disk             uint64 `gorm:"column:disk;default:null" json:"Disk"`
+	DiskUsed         uint64 `gorm:"column:disk_used;default:null" json:"DiskUsed"`
 	RAM              uint64 `gorm:"column:ram;default:null" json:"RAM"`
 	RAMUsed          uint64 `gorm:"column:ram_used;default:null" json:"RAMUsed"`
 	Swap             uint64 `gorm:"column:swap;default:null" json:"Swap"`
@@ -66,6 +68,8 @@ func (m *Monitor) Put(DBMonitor *gorm.DB) error {
 	r := DBMonitor.Model(&m).Where("id = ?", m.ID).Updates(map[string]interface{}{
 		"ip":                 m.IP,
 		"server":             m.Server,
+		"disk":               m.Disk,
+		"disk_used":          m.DiskUsed,
 		"ram":                m.RAM,
 		"ram_used":           m.RAMUsed,
 		"swap":               m.Swap,

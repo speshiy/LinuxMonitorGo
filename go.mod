@@ -10,6 +10,8 @@ require (
 	github.com/jinzhu/gorm v1.9.16
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/robfig/cron v1.2.0
+	github.com/shirou/gopsutil v3.21.11+incompatible
+	github.com/yusufpapurcu/wmi v1.2.2 // indirect
 	golang.org/x/sys v0.0.0-20210423082822-04245dca01da // indirect
 	gopkg.in/yaml.v2 v2.2.2
 )
